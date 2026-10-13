@@ -502,7 +502,165 @@
         grid-template-columns: 1fr;
       }
     }
+    /* ROYAL ANIMATIONS */
+
+@keyframes floatUp {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(34, 211, 238, 0);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(34, 211, 238, 0.35);
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes borderMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Hero entrance */
+.hero-grid > div {
+  animation: floatUp 0.9s ease both;
+}
+
+.hero-grid > div:nth-child(2) {
+  animation-delay: 0.25s;
+}
+
+/* Royal gradient name */
+h1 .name {
+  background: linear-gradient(90deg, #22d3ee, #a78bfa, #34d399, #22d3ee);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 5s linear infinite;
+}
+
+/* Photo royal glow */
+.photo-frame {
+  animation: glowPulse 4s ease-in-out infinite;
+  position: relative;
+}
+
+.photo-frame::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 26px;
+  padding: 2px;
+  background: linear-gradient(120deg, #22d3ee, #a78bfa, #34d399, #22d3ee);
+  background-size: 300% 300%;
+  animation: borderMove 6s ease infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Buttons */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: skewX(-20deg);
+  transition: 0.6s;
+}
+
+.btn:hover::before {
+  left: 130%;
+}
+
+/* Cards */
+.skill-card,
+.project,
+.stat,
+.timeline-item {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.7s ease, transform 0.7s ease, border-color 0.25s ease;
+}
+
+.skill-card.show,
+.project.show,
+.stat.show,
+.timeline-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Project image zoom */
+.project-image img {
+  transition: transform 0.6s ease;
+}
+
+.project:hover .project-image img {
+  transform: scale(1.08);
+}
+
+/* Section headings */
+h2 {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+h2.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #05080c;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#22d3ee, #34d399);
+  border-radius: 10px;
+}
   </style>
+  
 </head>
 <body>
 
@@ -808,6 +966,31 @@
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+  <script>
+  // Reveal animations when scrolling
+  const revealItems = document.querySelectorAll(
+    ".skill-card, .project, .stat, .timeline-item, h2"
+  );
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15
+    }
+  );
+
+  revealItems.forEach((item) => revealObserver.observe(item));
+
+  // Current year
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
 </body>
 </html>
