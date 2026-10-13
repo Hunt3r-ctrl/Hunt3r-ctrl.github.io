@@ -1,1 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[YOUR NAME] | Cybersecurity Learner & Bug Hunter</title>
+  <meta name="description" content="Cybersecurity learner, bug hunter, and technical content creator." />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #070b10;
+      --panel: #0d131a;
+      --card: #101820;
+      --black: #000;
+      --text: #e8eef5;
+      --muted: #98a6b3;
+      --accent: #22d3ee;
+      --accent2: #34d399;
+      --border: #1c2733;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+
+    .container {
+      width: min(1150px, 92%);
+      margin: auto;
+    }
+
+    /* NAVBAR */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(7, 11, 16, 0.82);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--text);
+    }
+
+    .logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      padding: 9px 16px;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent);
+      color: #04121a;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(34,211,238,0.14), transparent 38%),
+        radial-gradient(circle at 5% 85%, rgba(52,211,153,0.10), transparent 38%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .hello {
+      color: var(--accent2);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.95rem;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+
+    .name { color: var(--accent); }
+
+    .role {
+      display: block;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--muted);
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .hero-text {
+      color: var(--muted);
+      max-width: 590px;
+      margin: 22px 0 30px;
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-weight: 650;
+      font-size: 0.97rem;
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: 0.22s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #04121a;
+    }
+
+    .btn-primary:hover {
+      background: #67e8f9;
+      border-color: #67e8f9;
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .hero-photo {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .photo-frame {
+      width: min(330px, 80%);
+      aspect-ratio: 1;
+      border-radius: 24px;
+      background: linear-gradient(145deg, #0f1720, #060a0e);
+      border: 1px solid var(--border);
+      padding: 14px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+      filter: grayscale(15%);
+    }
+
+    .photo-badge {
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .photo-badge strong { color: var(--accent2); }
+
+    /* SECTIONS */
+    section { padding: 95px 0; }
+
+    .section-head { margin-bottom: 42px; }
+
+    .section-label {
+      color: var(--accent);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      margin-top: 10px;
+    }
+
+    .section-line {
+      width: 70px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      margin-top: 16px;
+      border-radius: 5px;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 38px;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-size: 1.03rem;
+    }
+
+    .about-text strong { color: var(--text); }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+    }
+
+    .stat h3 {
+      font-size: 1.6rem;
+      color: var(--accent);
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .skill-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      transition: 0.25s;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(34,211,238,0.5);
+    }
+
+    .skill-card h3 {
+      margin-bottom: 16px;
+      font-size: 1.15rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .chip {
+      background: #0a1016;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+    }
+
+    /* PROJECTS */
+    .projects {
+      background: var(--black);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .projects .section-label { color: var(--accent2); }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .project {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: 0.25s;
+    }
+
+    .project:hover {
+      transform: translateY(-6px);
+      border-color: rgba(34,211,238,0.55);
+    }
+
+    .project-image {
+      height: 190px;
+      background: #0a1016;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .project-body { padding: 24px; }
+
+    .project-body h3 {
+      margin-bottom: 10px;
+    }
+
+    .project-body p {
+      color: var(--muted);
+      margin-bottom: 16px;
+      font-size: 0.97rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .project-link {
+      font-weight: 650;
+      font-size: 0.95rem;
+    }
+
+    /* JOURNEY */
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 5px;
+      bottom: 5px;
+      width: 2px;
+      background: linear-gradient(var(--accent), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -27px;
+      top: 28px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(34,211,238,0.15);
+    }
+
+    .timeline-item h3 {
+      margin-bottom: 6px;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+    }
+
+    .timeline-year {
+      color: var(--accent);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* CONTACT */
+    .contact {
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(34,211,238,0.10), transparent 45%);
+    }
+
+    .contact p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+
+    .contact-actions {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 26px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+
+      .hero {
+        padding-top: 110px;
+        min-height: auto;
+      }
+
+      .hero-grid,
+      .about-grid,
+      .skills-grid,
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-photo {
+        order: -1;
+      }
+
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <a href="#" class="logo">[YOUR NAME]<span>.</span></a>
+
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#journey">Journey</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" href="[YOUR_RESUME_LINK]">Resume</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="hello">Hello World, I’m</p>
+        <h1>
+          [YOUR NAME]
+          <span class="role">Cybersecurity Learner & Bug Hunter</span>
+        </h1>
+
+        <p class="hero-text">
+          I explore how systems break, learn how to defend them, and explain security
+          concepts in a simple way. I’m building hands-on experience in offensive security,
+          defensive monitoring, and digital forensics.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View My Work</a>
+          <a href="[YOUR_GITHUB_LINK]" class="btn btn-ghost">GitHub</a>
+          <a href="[YOUR_LINKEDIN_LINK]" class="btn btn-ghost">LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="hero-photo">
+        <div class="photo-frame">
+          <img src="profile.jpg" alt="[YOUR NAME]" />
+        </div>
+        <div class="photo-badge">
+          Currently preparing for <strong>CPTS</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">About Me</span>
+        <h2>Learning security by doing, testing, and teaching</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I’m a cybersecurity learner with a <strong>Diploma in IT</strong> and around
+            <strong>one year of hands-on bug-hunting experience</strong>. My main interests
+            are offensive security, defensive monitoring, and digital forensics.
+          </p>
+          <p>
+            I work with tools such as <strong>Kali Linux, Wazuh, and FTK Imager</strong>.
+            I enjoy understanding how things actually work instead of only memorizing theory.
+            When I find something difficult, I break it down, test it, and turn it into
+            something practical.
+          </p>
+          <p>
+            I also create cybersecurity study content online and have experience teaching
+            students from KG to Grade 9. Teaching helped me learn how to explain complex
+            topics simply, patiently, and clearly.
+          </p>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat">
+            <h3>1+</h3>
+            <span>Year of bug-hunting experience</span>
+          </div>
+          <div class="stat">
+            <h3>IT</h3>
+            <span>Diploma completed</span>
+          </div>
+          <div class="stat">
+            <h3>CPTS</h3>
+            <span>Currently preparing</span>
+          </div>
+          <div class="stat">
+            <h3>Content</h3>
+            <span>Cybersecurity study creator</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">Skills</span>
+        <h2>What I work with</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Security Skills</h3>
+          <div class="chips">
+            <span class="chip">Bug Hunting</span>
+            <span class="chip">Reconnaissance</span>
+            <span class="chip">Log Analysis</span>
+            <span class="chip">Digital Forensics</span>
+            <span class="chip">Linux Fundamentals</span>
+            <span class="chip">Security Documentation</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Tools</h3>
+          <div class="chips">
+            <span class="chip">Kali Linux</span>
+            <span class="chip">Wazuh</span>
+            <span class="chip">FTK Imager</span>
+            <span class="chip">Nmap</span>
+            <span class="chip">Burp Suite</span>
+            <span class="chip">Wireshark</span>
+            <span class="chip">Git & GitHub</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Strengths</h3>
+          <div class="chips">
+            <span class="chip">Self-Learning</span>
+            <span class="chip">Problem-Solving</span>
+            <span class="chip">Teaching</span>
+            <span class="chip">Clear Communication</span>
+            <span class="chip">Consistency</span>
+            <span class="chip">Patience</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="projects">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">Projects</span>
+        <h2>Personal projects & security labs</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="project-grid">
+        <article class="project">
+          <div class="project-image">
+            <img src="project1.png" alt="Home Security Monitoring Lab">
+          </div>
+          <div class="project-body">
+            <h3>Home Security Monitoring Lab</h3>
+            <p>
+              A Wazuh-based lab to detect brute-force attempts, port scans, and suspicious
+              login activity using alerts, dashboards, and incident notes.
+            </p>
+            <div class="project-tags">
+              <span class="chip">Wazuh</span>
+              <span class="chip">Kali Linux</span>
+              <span class="chip">Log Analysis</span>
+            </div>
+            <a class="project-link" href="[PROJECT_1_GITHUB_LINK]">View on GitHub →</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-image">
+            <img src="project2.png" alt="Digital Forensics Case Study">
+          </div>
+          <div class="project-body">
+            <h3>Digital Forensics Case Study</h3>
+            <p>
+              Disk-image analysis using FTK Imager, focusing on artifacts, timeline building,
+              and writing a clear forensic investigation report.
+            </p>
+            <div class="project-tags">
+              <span class="chip">FTK Imager</span>
+              <span class="chip">Forensics</span>
+              <span class="chip">Incident Reporting</span>
+            </div>
+            <a class="project-link" href="[PROJECT_2_GITHUB_LINK]">View on GitHub →</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-image">
+            <img src="project3.png" alt="Cybersecurity Learning Hub">
+          </div>
+          <div class="project-body">
+            <h3>Cybersecurity Learning Hub</h3>
+            <p>
+              Beginner-friendly notes, labs, and walkthroughs covering Linux, networking,
+              reconnaissance, log analysis, and security fundamentals.
+            </p>
+            <div class="project-tags">
+              <span class="chip">Documentation</span>
+              <span class="chip">Labs</span>
+              <span class="chip">Cybersecurity</span>
+            </div>
+            <a class="project-link" href="[PROJECT_3_GITHUB_LINK]">View on GitHub →</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-image">
+            <img src="project4.png" alt="Bug Hunting Notes">
+          </div>
+          <div class="project-body">
+            <h3>Bug Hunting Notes</h3>
+            <p>
+              Sanitized notes on methodology, reconnaissance workflow, common vulnerability
+              classes, and lessons learned from practical bug-hunting experience.
+            </p>
+            <div class="project-tags">
+              <span class="chip">Bug Bounty</span>
+              <span class="chip">Methodology</span>
+              <span class="chip">Web Security</span>
+            </div>
+            <a class="project-link" href="[PROJECT_4_GITHUB_LINK]">View on GitHub →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">Journey</span>
+        <h2>My milestones</h2>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-year">Foundation</span>
+          <h3>Completed Diploma in IT</h3>
+          <p>Built a technical foundation and developed a strong interest in cybersecurity.</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-year">Hands-On</span>
+          <h3>One Year of Bug Hunting</h3>
+          <p>Practiced vulnerability research and worked with security tools including Kali Linux.</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-year">Teaching</span>
+          <h3>Taught Students from KG to Grade 9</h3>
+          <p>Learned how to simplify difficult concepts and communicate clearly with different learners.</p>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-year">Now</span>
+          <h3>CPTS Preparation & Portfolio Building</h3>
+          <p>Preparing for CPTS through Hack The Box while building practical security labs and projects.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-label">Contact</span>
+        <h2>Let’s connect</h2>
+        <div class="section-line" style="margin-left:auto;margin-right:auto;"></div>
+      </div>
+
+      <p>
+        I’m open to cybersecurity learning opportunities, internships, collaborations,
+        and technical discussions.
+      </p>
+
+      <div class="contact-actions">
+        <a href="mailto:[YOUR_EMAIL]" class="btn btn-primary">Email Me</a>
+        <a href="[YOUR_GITHUB_LINK]" class="btn btn-ghost">GitHub</a>
+        <a href="[YOUR_LINKEDIN_LINK]" class="btn btn-ghost">LinkedIn</a>
+        <a href="[YOUR_MEDIUM_LINK]" class="btn btn-ghost">Medium</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> [YOUR NAME]. Built with focus, consistency, and curiosity.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
